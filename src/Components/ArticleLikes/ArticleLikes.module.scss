@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  & .filled,
+  & .empty {
+    font-size: 18px;
+  }
+
+  & .empty {
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+  & .filled {
+    color: #ff0707;
+  }
+
+  & .count {
+    font-size: 14px;
+  }
+}

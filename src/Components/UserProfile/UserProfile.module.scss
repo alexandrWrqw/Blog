@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  & .column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .title {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 18px;
+  }
+
+  & .sub-title {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+  }
+}

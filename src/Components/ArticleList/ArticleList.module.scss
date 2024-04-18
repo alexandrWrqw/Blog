@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+
+  & .pagination {
+    font-size: inherit;
+    align-self: center;
+  }
+}

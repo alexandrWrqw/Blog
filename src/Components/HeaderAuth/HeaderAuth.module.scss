@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  & .create-art,
+  & .out {
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in;
+  }
+
+  & .create-art {
+    color: #52c41a;
+    font-size: 14px;
+
+    padding: 6px 10px;
+    border: 1px solid #52c41a;
+
+    &:hover {
+      background-color: #d2f8bf;
+    }
+  }
+
+  & .out {
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 18px;
+    line-height: 28px;
+
+    padding: 9px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+
+    &:hover {
+      background-color: #e3e6eb;
+    }
+  }
+
+  & .edit-profile {
+    position: relative;
+
+    &::before {
+      content: 'Edit';
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      color: #5b5b5b9f;
+      font-size: 14px;
+
+      transform: translateX(-20px);
+      opacity: 0;
+
+      transition:
+        transform 0.2s ease-in,
+        opacity 0.2s ease-in;
+    }
+
+    &:hover::before {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    & .edit-icon {
+      position: absolute;
+      left: 28px;
+      bottom: 3px;
+
+      color: #5b5b5b9f;
+      font-size: 12px;
+
+      transform: translateX(-20px);
+      opacity: 0;
+
+      transition:
+        transform 0.2s ease-in,
+        opacity 0.2s ease-in;
+    }
+
+    &:hover .edit-icon {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}

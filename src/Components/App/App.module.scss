@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+  margin: 0;
+  background-color: #ebeef3;
+
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+p {
+  font-size: inherit;
+  font-weight: inherit;
+
+  margin: 0;
+}
+
+button {
+  font-size: inherit;
+  font-family: inherit;
+
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 26px 10px;
+}

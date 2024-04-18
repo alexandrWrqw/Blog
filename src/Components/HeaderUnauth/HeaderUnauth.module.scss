@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  & .in,
+  & .up {
+    font-size: 18px;
+    line-height: 28px;
+
+    padding: 9px 18px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in;
+  }
+
+  & .in {
+    &:hover {
+      background-color: #e3e6eb;
+    }
+  }
+
+  & .up {
+    color: #52c41a;
+    border: 1px solid #52c41a;
+
+    &:hover {
+      background-color: #d2f8bf;
+    }
+  }
+}
