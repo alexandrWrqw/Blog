@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 25px 0;
+
+  font-family: 'Roboto', sans-serif;
+  color: #262626;
+
+  & .form {
+    display: flex;
+    flex-direction: column;
+    padding: 48px 32px;
+    width: 320px;
+
+    background-color: #ffffff;
+    box-shadow:
+      0px 0.61px 2.93px 0px #00000005,
+      0px 1.46px 7.05px 0px #00000007,
+      0px 2.75px 13.27px 0px #00000009,
+      0px 4.91px 23.68px 0px #0000000b,
+      0px 9.19px 44.28px 0px #0000000d,
+      0px 22px 106px 0px #00000012;
+    border-radius: 6px;
+
+    & .title {
+      align-self: center;
+      margin-bottom: 20px;
+
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    & .label {
+      display: flex;
+      flex-direction: column;
+
+      font-size: 14px;
+
+      &:not(:nth-of-type(2)) {
+        margin-bottom: 12px;
+      }
+
+      & span {
+        margin-bottom: 3px;
+      }
+    }
+
+    & .field {
+      padding: 8px 12px;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      outline-color: #1890ff;
+
+      font-size: 16px;
+
+      &::placeholder {
+        font-size: 16px;
+        color: #bfbfbf;
+      }
+    }
+
+    & .login {
+      padding: 8px 0;
+      margin: 20px 0 10px 0;
+      border-radius: 4px;
+
+      background-color: #1890ff;
+      color: #ffffff;
+      line-height: 24px;
+
+      transition: background-color 0.2s ease-in;
+
+      &:hover {
+        background-color: #1475cf;
+      }
+    }
+
+    & .text {
+      align-self: center;
+
+      font-size: 12px;
+      color: #8c8c8c;
+
+      & button {
+        color: #1890ff;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
