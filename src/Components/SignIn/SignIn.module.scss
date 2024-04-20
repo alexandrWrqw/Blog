@@ -6,6 +6,10 @@
   font-family: 'Roboto', sans-serif;
   color: #262626;
 
+  & label:not(:last-of-type) {
+    margin-bottom: 12px;
+  }
+
   & .form {
     display: flex;
     flex-direction: column;
@@ -28,35 +32,6 @@
 
       font-size: 20px;
       font-weight: 500;
-    }
-
-    & .label {
-      display: flex;
-      flex-direction: column;
-
-      font-size: 14px;
-
-      &:not(:nth-of-type(2)) {
-        margin-bottom: 12px;
-      }
-
-      & span {
-        margin-bottom: 3px;
-      }
-    }
-
-    & .field {
-      padding: 8px 12px;
-      border: 1px solid #d9d9d9;
-      border-radius: 4px;
-      outline-color: #1890ff;
-
-      font-size: 16px;
-
-      &::placeholder {
-        font-size: 16px;
-        color: #bfbfbf;
-      }
     }
 
     & .login {

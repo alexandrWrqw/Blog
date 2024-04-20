@@ -30,6 +30,10 @@
     color: #1890ff;
     font-size: 20px;
 
+    & .no-title {
+      color: #f5222d58;
+    }
+
     &:hover {
       text-decoration: underline;
     }

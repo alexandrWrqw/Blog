@@ -3,20 +3,34 @@
   align-items: center;
   gap: 5px;
 
+  &:hover {
+    & .empty {
+      color: #ff0707;
+      font-size: 20px;
+    }
+  }
+
   & .filled,
   & .empty {
     font-size: 18px;
   }
 
   & .empty {
+    position: absolute;
     color: rgba(0, 0, 0, 0.75);
+
+    transition:
+      font-size 0.2s ease-in,
+      color 0.2s ease-in;
   }
 
   & .filled {
+    position: absolute;
     color: #ff0707;
   }
 
   & .count {
+    padding-left: 24px;
     font-size: 14px;
   }
 }

@@ -1,4 +1,5 @@
 import classes from './SignIn.module.scss';
+import createInputs from '../../tools/createInputs/createInputs';
 
 function SignIn() {
   return (
@@ -6,25 +7,7 @@ function SignIn() {
       <form className={classes.form}>
         <h2 className={classes.title}>Sign In</h2>
 
-        <label className={classes.label} htmlFor="email">
-          <span>Email address</span>
-          <input
-            className={classes.field}
-            id="email"
-            type="email"
-            placeholder="Email address"
-          />
-        </label>
-
-        <label className={classes.label} htmlFor="password">
-          <span>Password</span>
-          <input
-            className={classes.field}
-            id="password"
-            type="password"
-            placeholder="Password"
-          />
-        </label>
+        {createInputs(['Email address', 'Password'])}
 
         <button className={classes.login} type="button">
           Login

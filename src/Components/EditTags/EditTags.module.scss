@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 14px;
+
+  & .title {
+    margin-bottom: 3px;
+  }
+
+  & .field {
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    outline-color: #1890ff;
+    width: 300px;
+
+    font-size: 16px;
+    line-height: 24px;
+
+    &::placeholder {
+      font-size: 16px;
+      color: #bfbfbf;
+    }
+  }
+
+  & .add-tag,
+  & .added-tags {
+    display: flex;
+    gap: 17px;
+  }
+
+  & .added-tags * {
+    margin-bottom: 5px;
+  }
+
+  & .delete,
+  & .add {
+    padding: 8px;
+    border-radius: 6px;
+    width: 120px;
+
+    font-size: 16px;
+    line-height: 24px;
+
+    transition: background-color 0.2s ease-in;
+  }
+
+  & .delete {
+    border: 1px solid #f5222d;
+    color: #f5222d;
+
+    &:hover {
+      background-color: #f5222d44;
+    }
+  }
+
+  & .add {
+    border: 1px solid #1890ff;
+    color: #1890ff;
+
+    &:hover {
+      background-color: #188fff44;
+    }
+  }
+}

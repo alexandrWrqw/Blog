@@ -1,3 +1,5 @@
+// import { useGetArticlesQuery } from '../../API/articlesApi';
+
 import classes from './App.module.scss';
 
 import Header from '../Header/Header';
@@ -6,13 +8,19 @@ import ArticleItem from '../ArticleItem/ArticleItem';
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn';
 import EditProfile from '../EditProfile/EditProfile';
+import CreateArticle from '../CreateArticle/CreateArticle';
 
 function App() {
-  const devFlag = false;
+  // const { data: articlesData, error, isLoading } = useGetArticlesQuery(0);
+
+  // console.log(articlesData);
+
+  const devFlag = true;
   const devFlag2 = false;
   const devFlag3 = false;
   const devFlag4 = false;
   const devFlag5 = false;
+  const devFlag6 = false;
 
   return (
     <div className={classes.container}>
@@ -24,6 +32,7 @@ function App() {
         {devFlag3 ? <SignUp /> : null}
         {devFlag4 ? <SignIn /> : null}
         {devFlag5 ? <EditProfile /> : null}
+        {devFlag6 ? <CreateArticle /> : null}
       </section>
     </div>
   );

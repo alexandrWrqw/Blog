@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 
 import classes from './ArticleItem.module.scss';
@@ -7,12 +8,19 @@ import UserProfile from '../UserProfile/UserProfile';
 import ArticleLikes from '../ArticleLikes/ArticleLikes';
 import ArticleActions from '../ArticleActions/ArticleActions';
 
-function ArticleItem() {
+function ArticleItem({ article }) {
   const isFull = false;
 
-  const fullContent = isFull ? (
-    <Markdown className={classes.description}>Markdown</Markdown>
+  const body = isFull ? (
+    <Markdown className={classes.description}>{article.body}</Markdown>
   ) : null;
+
+  const title =
+    article.title.trim() !== '' ? (
+      article.title
+    ) : (
+      <div className={classes['no-title']}>No title</div>
+    );
 
   return (
     <li className={classes.container}>
@@ -21,14 +29,14 @@ function ArticleItem() {
           <div className={classes.header}>
             <h3>
               <button className={classes.title} type="button">
-                Article title
+                {title}
               </button>
             </h3>
 
-            <ArticleLikes />
+            <ArticleLikes favoritesCount={article.favoritesCount} />
           </div>
 
-          <ArticleTags />
+          <ArticleTags tags={article.tagList} />
 
           <p
             style={
@@ -37,21 +45,27 @@ function ArticleItem() {
                 : { color: 'rgba(0, 0, 0, 0.75)' }
             }
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            {article.description}
           </p>
         </div>
 
         <div className={classes.right}>
-          <UserProfile />
+          <UserProfile author={article.author} />
           {isFull ? <ArticleActions /> : null}
         </div>
       </div>
 
-      {fullContent}
+      {body}
     </li>
   );
 }
+
+ArticleItem.defaultProps = {
+  article: {},
+};
+
+ArticleItem.propTypes = {
+  article: PropTypes.object,
+};
+
 export default ArticleItem;

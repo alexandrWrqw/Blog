@@ -43,6 +43,11 @@ li {
   list-style-type: none;
 }
 
+textarea {
+  resize: none;
+  font-family: inherit;
+}
+
 .container {
   height: 100vh;
   box-sizing: border-box;
