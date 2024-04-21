@@ -6,9 +6,10 @@
   & .column {
     display: flex;
     flex-direction: column;
+    align-items: end;
   }
 
-  & .title {
+  & .name {
     color: rgba(0, 0, 0, 0.85);
     font-size: 18px;
   }
@@ -16,5 +17,11 @@
   & .sub-title {
     color: rgba(0, 0, 0, 0.5);
     font-size: 12px;
+  }
+
+  & .img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
   }
 }

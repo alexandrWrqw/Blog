@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
+import limitText from '../../tools/limitText/limitText';
 
 import classes from './ArticleItem.module.scss';
 
@@ -12,14 +13,21 @@ function ArticleItem({ article }) {
   const isFull = false;
 
   const body = isFull ? (
-    <Markdown className={classes.description}>{article.body}</Markdown>
+    <Markdown className={classes.body}>{article.body}</Markdown>
   ) : null;
 
   const title =
-    article.title.trim() !== '' ? (
+    article.title !== null && article.title.trim() !== '' ? (
       article.title
     ) : (
-      <div className={classes['no-title']}>No title</div>
+      <span className={classes['no-content']}>No title</span>
+    );
+
+  const description =
+    article.description !== null && article.description.trim() !== '' ? (
+      article.description
+    ) : (
+      <span className={classes['no-content']}>No description</span>
     );
 
   return (
@@ -29,7 +37,7 @@ function ArticleItem({ article }) {
           <div className={classes.header}>
             <h3>
               <button className={classes.title} type="button">
-                {title}
+                {limitText(title, 55)}
               </button>
             </h3>
 
@@ -38,19 +46,15 @@ function ArticleItem({ article }) {
 
           <ArticleTags tags={article.tagList} />
 
-          <p
-            style={
-              isFull
-                ? { color: 'rgba(0, 0, 0, 0.5)' }
-                : { color: 'rgba(0, 0, 0, 0.75)' }
-            }
-          >
-            {article.description}
-          </p>
+          <p className={classes.description}>{limitText(description, 145)}</p>
         </div>
 
         <div className={classes.right}>
-          <UserProfile author={article.author} />
+          <UserProfile
+            author={article.author}
+            isArticle
+            whenCreated={article.createdAt}
+          />
           {isFull ? <ArticleActions /> : null}
         </div>
       </div>

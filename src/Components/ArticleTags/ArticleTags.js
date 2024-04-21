@@ -1,14 +1,24 @@
 import PropTypes from 'prop-types';
+import { v4 as uniqueKey } from 'uuid';
 
 import classes from './ArticleTags.module.scss';
 
 function ArticleTags({ tags }) {
-  let content =
-    tags && tags.map((tag) => <li className={classes.tag}>{tag}</li>);
+  const filter =
+    tags &&
+    tags.filter(
+      (tag) => tag.trim() !== '' && tag !== null && tag !== undefined,
+    );
 
-  if (!tags.length) content = <li className={classes['no-tag']}>No tags</li>;
+  let content = filter.map((tag) => (
+    <li key={uniqueKey()} className={classes.tag}>
+      {tag}
+    </li>
+  ));
 
-  return <ul className={classes.container}>{content}</ul>;
+  if (!content.length) content = <li className={classes['no-tag']}>No tags</li>;
+
+  return <ul className={`${classes.container} ${classes.limit}`}>{content}</ul>;
 }
 
 ArticleTags.defaultProps = {

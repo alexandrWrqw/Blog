@@ -18,7 +18,7 @@ function HeaderAuth() {
         aria-label="edit profile"
       >
         <FontAwesomeIcon icon={editIcon} className={classes['edit-icon']} />
-        <UserProfile />
+        <UserProfile author={{ username: 'Alexandr' }} isArticle={false} />
       </button>
 
       <button className={classes.out} type="button">

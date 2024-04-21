@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  align-items: flex-start;
   gap: 8px;
 
   & .tag {
@@ -18,5 +19,21 @@
     padding: 3px 6px;
     border-radius: 2px;
     border: 1px solid #f5222d58;
+  }
+}
+
+.limit {
+  width: 600px;
+  overflow-x: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 70px;
+    background: linear-gradient(to right, transparent, #ffffff);
   }
 }
