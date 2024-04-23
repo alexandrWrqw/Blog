@@ -6,7 +6,7 @@ export const articlesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://blog.kata.academy/api' }),
 
   endpoints: (builder) => ({
-    getArticles: builder.query({
+    getAllArticles: builder.query({
       query: (_offset = 0) => ({
         url: '/articles',
         params: {
@@ -15,7 +15,13 @@ export const articlesApi = createApi({
         },
       }),
     }),
+
+    getSoloArticle: builder.query({
+      query: (_slug) => ({
+        url: `/articles/${_slug}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetArticlesQuery } = articlesApi;
+export const { useGetAllArticlesQuery, useGetSoloArticleQuery } = articlesApi;

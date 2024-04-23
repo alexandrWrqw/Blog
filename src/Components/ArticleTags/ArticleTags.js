@@ -3,7 +3,7 @@ import { v4 as uniqueKey } from 'uuid';
 
 import classes from './ArticleTags.module.scss';
 
-function ArticleTags({ tags }) {
+function ArticleTags({ tags, isFull }) {
   const filter =
     tags &&
     tags.filter(
@@ -18,7 +18,13 @@ function ArticleTags({ tags }) {
 
   if (!content.length) content = <li className={classes['no-tag']}>No tags</li>;
 
-  return <ul className={`${classes.container} ${classes.limit}`}>{content}</ul>;
+  return (
+    <ul
+      className={`${classes.container} ${isFull ? classes.wrap : classes.limit}`}
+    >
+      {content}
+    </ul>
+  );
 }
 
 ArticleTags.defaultProps = {
@@ -27,6 +33,7 @@ ArticleTags.defaultProps = {
 
 ArticleTags.propTypes = {
   tags: PropTypes.array,
+  isFull: PropTypes.bool.isRequired,
 };
 
 export default ArticleTags;

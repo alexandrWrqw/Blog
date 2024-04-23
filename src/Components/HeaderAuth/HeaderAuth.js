@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPen as editIcon } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,14 +14,16 @@ function HeaderAuth() {
         Create article
       </button>
 
-      <button
-        className={classes['edit-profile']}
-        type="button"
-        aria-label="edit profile"
-      >
-        <FontAwesomeIcon icon={editIcon} className={classes['edit-icon']} />
-        <UserProfile author={{ username: 'Alexandr' }} isArticle={false} />
-      </button>
+      <Link to="edit-profile">
+        <button
+          className={classes['edit-profile']}
+          type="button"
+          aria-label="edit profile"
+        >
+          <FontAwesomeIcon icon={editIcon} className={classes['edit-icon']} />
+          <UserProfile author={{ username: 'Alexandr' }} isArticle={false} />
+        </button>
+      </Link>
 
       <button className={classes.out} type="button">
         Log Out

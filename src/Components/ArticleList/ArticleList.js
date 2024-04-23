@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Pagination } from 'antd';
-import { useGetArticlesQuery } from '../../API/articlesApi';
+import { useGetAllArticlesQuery } from '../../API/articlesApi';
 
 import classes from './ArticleList.module.scss';
 
@@ -12,7 +12,11 @@ function ArticleList() {
   const [page, setPage] = useState(1);
 
   const offset = (page - 1) * 5; // пропускать по 5 статей, начиная со 2 страницы
-  const { data: articlesData, error, isLoading } = useGetArticlesQuery(offset);
+  const {
+    data: articlesData,
+    error,
+    isLoading,
+  } = useGetAllArticlesQuery(offset);
 
   const articles = articlesData && articlesData.articles;
   const articlesCount = articlesData && articlesData.articlesCount;
@@ -20,7 +24,7 @@ function ArticleList() {
   const content =
     articlesData &&
     articles.map((article) => (
-      <ArticleItem key={article.slug} article={article} />
+      <ArticleItem key={article.slug} article={article} isFull={false} />
     ));
 
   const pagination = articlesData && (
