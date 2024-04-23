@@ -14,24 +14,27 @@ import SignIn from './Components/SignIn/SignIn';
 const rootContainer = document.getElementById('root');
 const root = ReactDOM.createRoot(rootContainer);
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <RouteErrorMessage />,
-    children: [
-      {
-        path: 'articles',
-        element: <ArticleList />,
-      },
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      errorElement: <RouteErrorMessage />,
+      children: [
+        {
+          path: 'articles',
+          element: <ArticleList />,
+        },
 
-      {
-        path: 'authorization',
-        element: <SignIn />,
-      },
-    ],
-  },
-]);
+        {
+          path: 'authorization',
+          element: <SignIn />,
+        },
+      ],
+    },
+  ],
+  { basename: '/Blog' },
+);
 
 root.render(
   <StrictMode>
