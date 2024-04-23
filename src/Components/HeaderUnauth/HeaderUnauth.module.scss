@@ -3,6 +3,11 @@
   align-items: center;
   gap: 20px;
 
+  & .reset {
+    text-decoration: none;
+    color: inherit;
+  }
+
   & .in,
   & .up {
     font-size: 18px;

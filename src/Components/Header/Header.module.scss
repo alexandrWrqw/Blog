@@ -6,7 +6,16 @@
   padding: 16px 22px;
   background-color: #ffffff;
 
+  & .reset {
+    text-decoration: none;
+    color: inherit;
+  }
+
   & .title {
     font-size: 18px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
