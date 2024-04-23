@@ -1,1 +1,1 @@
-https://alexandrwrqw.github.io/Blog/
+https://blog-six-wheat-61.vercel.app/
