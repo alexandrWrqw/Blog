@@ -11,7 +11,7 @@ function Header() {
   return (
     <header className={classes.container}>
       <h1 className={classes.title}>
-        <Link className={classes.reset} to="/Blog">
+        <Link className={classes.reset} to="/">
           Realworld Blog
         </Link>
       </h1>

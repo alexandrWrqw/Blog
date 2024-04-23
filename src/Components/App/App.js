@@ -24,7 +24,7 @@ function App() {
 
       <section className={classes.content}>
         <Routes>
-          <Route path="/Blog" element={<ArticleList />} />
+          <Route path="/" element={<ArticleList />} />
           <Route path="/authorization" element={<SignIn />} />
         </Routes>
         {/* {devFlag ? <ArticleList /> : null} */}
