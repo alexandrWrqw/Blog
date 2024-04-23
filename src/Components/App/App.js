@@ -1,12 +1,12 @@
-import { Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import classes from './App.module.scss';
 
 import Header from '../Header/Header';
-// import ArticleList from '../ArticleList/ArticleList';
+import ArticleList from '../ArticleList/ArticleList';
 // import ArticleItem from '../ArticleItem/ArticleItem';
 // import SignUp from '../SignUp/SignUp';
-// import SignIn from '../SignIn/SignIn';
+import SignIn from '../SignIn/SignIn';
 // import EditProfile from '../EditProfile/EditProfile';
 // import CreateArticle from '../CreateArticle/CreateArticle';
 
@@ -23,7 +23,10 @@ function App() {
       <Header />
 
       <section className={classes.content}>
-        <Outlet />
+        <Routes>
+          <Route path="/Blog" element={<ArticleList />} />
+          <Route path="/authorization" element={<SignIn />} />
+        </Routes>
         {/* {devFlag ? <ArticleList /> : null} */}
         {/* {devFlag2 ? <ArticleItem /> : null} */}
         {/* {devFlag3 ? <SignUp /> : null} */}
