@@ -14,7 +14,7 @@ function HeaderAuth() {
         Create article
       </button>
 
-      <Link to="edit-profile">
+      <Link to="profile">
         <button
           className={classes['edit-profile']}
           type="button"

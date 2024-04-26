@@ -6,7 +6,7 @@ import HeaderUnauth from '../HeaderUnauth/HeaderUnauth';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 
 function Header() {
-  const devFlag = true;
+  const devFlag = false;
 
   return (
     <header className={classes.container}>
