@@ -1,26 +1,30 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
+
 import { useSignUpMutation } from '../../API/userApi';
+import { setUser } from '../../store/userSlice';
 
 import classes from './SignUp.module.scss';
 import Input from '../Input/Input';
 
 function SignUp() {
-  const [alreadyTakenValues, setAlreadyTakenValues] = useState([]);
   const [createAccount] = useSignUpMutation();
+
+  const dispatch = useDispatch();
+  const setUserDispatch = (data) => dispatch(setUser(data));
 
   const methods = useForm({ mode: 'onSubmit' });
   const {
     register,
     handleSubmit,
-    getValues,
     reset,
+    setError,
     formState: { errors },
   } = methods;
 
-  const onSubmit = async ({ username, email, password }) => {
-    const userData = {
+  const onSubmit = ({ username, email, password }) => {
+    const user = {
       user: {
         username,
         email,
@@ -28,18 +32,27 @@ function SignUp() {
       },
     };
 
-    try {
-      await createAccount(userData).unwrap();
+    createAccount(user)
+      .unwrap()
+      .then((userData) => {
+        setUserDispatch(userData.user);
+        reset();
+      })
+      .catch((e) => {
+        if (e.data.errors.username) {
+          setError('username', {
+            type: 'busy',
+            message: 'Username is already taken',
+          });
+        }
 
-      reset();
-      setAlreadyTakenValues([]);
-    } catch (e) {
-      if (e.data.errors?.username)
-        setAlreadyTakenValues((prev) => [...prev, getValues('username')]);
-
-      if (e.data.errors?.email)
-        setAlreadyTakenValues((prev) => [...prev, getValues('email')]);
-    }
+        if (e.data.errors.email) {
+          setError('email', {
+            type: 'busy',
+            message: 'Email is already taken',
+          });
+        }
+      });
   };
 
   return (
@@ -53,7 +66,6 @@ function SignUp() {
             id="username"
             type="text"
             placeholder="Username"
-            alreadyTakenValues={alreadyTakenValues}
           />
 
           <Input
@@ -61,7 +73,6 @@ function SignUp() {
             id="email"
             type="email"
             placeholder="Email address"
-            alreadyTakenValues={alreadyTakenValues}
           />
 
           <Input

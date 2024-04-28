@@ -6,10 +6,7 @@
   margin-top: 3px;
 
   &:hover {
-    & .empty {
-      color: #ff0707;
-      font-size: 20px;
-    }
+    cursor: auto;
   }
 
   & .filled,
@@ -32,7 +29,17 @@
   }
 
   & .count {
+    color: rgba(0, 0, 0, 0.75);
     padding-left: 24px;
     font-size: 14px;
+  }
+}
+
+.container-hover {
+  &:hover {
+    & .empty {
+      color: #ff0707;
+      font-size: 20px;
+    }
   }
 }

@@ -7,16 +7,27 @@ export const userApi = createApi({
 
   endpoints: (builder) => ({
     signUp: builder.mutation({
-      query: (_body = {}) => ({
+      query: (body) => ({
         url: '/users',
         method: 'POST',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
-        body: _body,
+        body,
+      }),
+    }),
+
+    signIn: builder.mutation({
+      query: (body) => ({
+        url: '/users/login',
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body,
       }),
     }),
   }),
 });
 
-export const { useSignUpMutation } = userApi;
+export const { useSignUpMutation, useSignInMutation } = userApi;

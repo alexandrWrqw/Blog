@@ -4,10 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as emptyHeartIcon } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as filledHeartIcon } from '@fortawesome/free-solid-svg-icons';
 
+import useAuth from '../../hooks/useAuth';
+
 import classes from './ArticleLikes.module.scss';
 
 function ArticleLikes({ favoritesCount }) {
   const devFlag = false;
+  const { isAuth } = useAuth();
 
   const activeLikeIcon = (
     <FontAwesomeIcon icon={filledHeartIcon} className={classes.filled} />
@@ -18,7 +21,15 @@ function ArticleLikes({ favoritesCount }) {
   );
 
   return (
-    <button className={classes.container} type="button">
+    <button
+      className={
+        isAuth
+          ? `${classes.container} ${classes['container-hover']}`
+          : `${classes.container}`
+      }
+      type="button"
+      disabled={!isAuth}
+    >
       {devFlag ? activeLikeIcon : likeIcon}
 
       <span className={classes.count}>{favoritesCount}</span>

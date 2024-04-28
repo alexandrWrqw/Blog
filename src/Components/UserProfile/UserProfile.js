@@ -2,13 +2,16 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
 import classes from './UserProfile.module.scss';
-import avatar from './avatar.svg';
 
-function UserProfile({ author, isArticle, whenCreated }) {
+function UserProfile({ user, isArticle, whenCreated }) {
+  const defaultAvatar =
+    'https://static.productionready.io/images/smiley-cyrus.jpg';
+
   return (
     <div className={classes.container}>
       <div className={classes.column}>
-        <h2 className={classes.name}>{author.username}</h2>
+        <h2 className={classes.name}>{user.username}</h2>
+
         {isArticle ? (
           <span className={classes['sub-title']}>
             {format(new Date(whenCreated), 'MMMM d, y')}
@@ -18,7 +21,7 @@ function UserProfile({ author, isArticle, whenCreated }) {
 
       <img
         className={classes.img}
-        src={author.image ? author.image : avatar}
+        src={user.image ? user.image : defaultAvatar}
         alt="avatar"
       />
     </div>
@@ -26,12 +29,12 @@ function UserProfile({ author, isArticle, whenCreated }) {
 }
 
 UserProfile.defaultProps = {
-  author: {},
+  user: {},
   whenCreated: '',
 };
 
 UserProfile.propTypes = {
-  author: PropTypes.object,
+  user: PropTypes.object,
   isArticle: PropTypes.bool.isRequired,
   whenCreated: PropTypes.string,
 };

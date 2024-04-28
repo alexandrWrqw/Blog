@@ -1,13 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPen as editIcon } from '@fortawesome/free-solid-svg-icons';
 
-import classes from './HeaderAuth.module.scss';
+import { removeUser } from '../../store/userSlice';
 
+import classes from './HeaderAuth.module.scss';
 import UserProfile from '../UserProfile/UserProfile';
 
 function HeaderAuth() {
+  const dispatch = useDispatch();
+  const removeUserDispatch = () => dispatch(removeUser());
+
+  const { username, image } = useSelector((state) => state.user);
+
   return (
     <div className={classes.container}>
       <button className={classes['create-art']} type="button">
@@ -21,11 +28,15 @@ function HeaderAuth() {
           aria-label="edit profile"
         >
           <FontAwesomeIcon icon={editIcon} className={classes['edit-icon']} />
-          <UserProfile author={{ username: 'Alexandr' }} isArticle={false} />
+          <UserProfile user={{ username, image }} isArticle={false} />
         </button>
       </Link>
 
-      <button className={classes.out} type="button">
+      <button
+        className={classes.out}
+        type="button"
+        onClick={removeUserDispatch}
+      >
         Log Out
       </button>
     </div>

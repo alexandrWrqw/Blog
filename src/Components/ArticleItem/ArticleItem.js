@@ -58,7 +58,7 @@ function ArticleItem({ article, isFull }) {
 
         <div className={classes.right}>
           <UserProfile
-            author={article.author}
+            user={article.author}
             isArticle
             whenCreated={article.createdAt}
           />

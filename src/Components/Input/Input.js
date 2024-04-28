@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import classes from './Input.module.scss';
 
-function Input({ label, id, type, placeholder, alreadyTakenValues }) {
+function Input({ label, id, type, placeholder }) {
   const {
     register,
     watch,
@@ -50,10 +50,6 @@ function Input({ label, id, type, placeholder, alreadyTakenValues }) {
     },
   };
 
-  const alreadyMessage = alreadyTakenValues.includes(watch(id))
-    ? `This ${id} is already taken`
-    : null;
-
   return (
     <label className={classes.container} htmlFor={id}>
       <span>{label}</span>
@@ -67,10 +63,7 @@ function Input({ label, id, type, placeholder, alreadyTakenValues }) {
         {...register(id, options[id])}
       />
 
-      <p className={classes.error}>
-        {errors?.[id] && errors[id].message}
-        {alreadyMessage}
-      </p>
+      <p className={classes.error}>{errors?.[id] && errors[id].message}</p>
     </label>
   );
 }
@@ -80,12 +73,6 @@ Input.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-
-  alreadyTakenValues: PropTypes.array,
-};
-
-Input.defaultProps = {
-  alreadyTakenValues: [],
 };
 
 export default Input;
