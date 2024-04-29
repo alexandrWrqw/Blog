@@ -48,6 +48,8 @@ function Input({ label, id, type, placeholder }) {
       validate: (value) =>
         watch('password') === value ? true : 'Passwords must match',
     },
+
+    image: {},
   };
 
   return (

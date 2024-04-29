@@ -30,6 +30,7 @@ function SignIn() {
       .unwrap()
       .then((userData) => {
         setUserDispatch(userData.user);
+        localStorage.setItem('token', userData.user.token);
         reset();
         navigate('/');
       })

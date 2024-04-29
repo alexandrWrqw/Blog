@@ -1,5 +1,4 @@
 import classes from './CreateArticle.module.scss';
-import createInputs from '../../tools/createInputs/createInputs';
 
 import EditTags from '../EditTags/EditTags';
 
@@ -8,8 +7,6 @@ function CreateArticle() {
     <div className={classes.container}>
       <form className={classes.form}>
         <h2 className={classes.title}>Create new article</h2>
-
-        {createInputs(['Title', 'Short description'])}
 
         <label className={classes.label} htmlFor="text">
           <span>Text</span>

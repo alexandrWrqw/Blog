@@ -1,23 +1,105 @@
+import { useDispatch } from 'react-redux';
+import { useForm, FormProvider } from 'react-hook-form';
+
+import { useNavigate } from 'react-router-dom';
+import { useUpdateUserMutation } from '../../API/userApi';
+import { setUser } from '../../store/userSlice';
+import useAuth from '../../hooks/useAuth';
+
 import classes from './EditProfile.module.scss';
-import createInputs from '../../tools/createInputs/createInputs';
+import Input from '../Input/Input';
 
 function EditProfile() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [editAccount] = useUpdateUserMutation();
+  const updateUserDispatch = (data) => dispatch(setUser(data));
+
+  const { username: defaultUserName, email: defaultEmail } = useAuth();
+  const methods = useForm({
+    mode: 'onSubmit',
+    defaultValues: {
+      username: defaultUserName,
+      email: defaultEmail,
+    },
+  });
+  const { handleSubmit, reset, setError } = methods;
+
+  const onSubmit = ({ username, email, password, image }) => {
+    const requestData = {
+      user: {
+        username,
+        email,
+        password,
+        image,
+      },
+    };
+
+    editAccount(requestData)
+      .unwrap()
+      .then((editedData) => {
+        updateUserDispatch(editedData.user);
+
+        reset();
+        navigate('/');
+      })
+      .catch((e) => {
+        if (e.data.errors.username) {
+          setError('username', {
+            type: 'busy',
+            message: 'Username is already taken',
+          });
+        }
+
+        if (e.data.errors.email) {
+          setError('email', {
+            type: 'busy',
+            message: 'Email is already taken',
+          });
+        }
+      });
+  };
+
   return (
     <div className={classes.container}>
-      <form className={classes.form}>
-        <h2 className={classes.title}>Edit profile</h2>
+      <FormProvider {...methods}>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+          <h2 className={classes.title}>Edit profile</h2>
 
-        {createInputs([
-          'Username',
-          'Email address',
-          'New password',
-          'Avatar image (url)',
-        ])}
+          <Input
+            label="Username"
+            id="username"
+            type="text"
+            placeholder="Username"
+          />
 
-        <button className={classes.save} type="button">
-          Save
-        </button>
-      </form>
+          <Input
+            label="Email address"
+            id="email"
+            type="email"
+            placeholder="Email address"
+          />
+
+          <Input
+            label="New password"
+            id="password"
+            type="password"
+            placeholder="Password"
+          />
+
+          <Input
+            label="Avatar image (url)"
+            id="image"
+            type="url"
+            placeholder="Avatar image"
+          />
+
+          <button className={classes.save} type="submit">
+            Save
+          </button>
+        </form>
+      </FormProvider>
     </div>
   );
 }

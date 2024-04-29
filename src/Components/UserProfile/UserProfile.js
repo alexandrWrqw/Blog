@@ -30,7 +30,7 @@ function UserProfile({ user, isArticle, whenCreated }) {
 
 UserProfile.defaultProps = {
   user: {},
-  whenCreated: '',
+  whenCreated: null,
 };
 
 UserProfile.propTypes = {
