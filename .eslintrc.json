@@ -21,7 +21,7 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-props-no-spreading": [
           1,
-          { "exceptions": ["input", "Input", "FormProvider"] }
+          { "exceptions": ["input", "Input", "FormProvider", "textarea"] }
         ], // for { ...register('') }
         "react/forbid-prop-types": "off",
         "no-plusplus": "off"
