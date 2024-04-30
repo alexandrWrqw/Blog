@@ -7,6 +7,7 @@ import ArticleItemFull from '../Components/ArticleItemFull/ArticleItemFull';
 import SignIn from '../Components/SignIn/SignIn';
 import SignUp from '../Components/SignUp/SignUp';
 import EditProfile from '../Components/EditProfile/EditProfile';
+import CreateArticle from '../Components/CreateArticle/CreateArticle';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path: '/articles/:slug',
         element: <ArticleItemFull />,
+      },
+
+      {
+        path: '/new-article',
+        element: <CreateArticle />,
       },
 
       {

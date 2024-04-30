@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { useSignUpMutation } from '../../API/userApi';
@@ -9,10 +9,11 @@ import classes from './SignUp.module.scss';
 import Input from '../Input/Input';
 
 function SignUp() {
-  const [createAccount] = useSignUpMutation();
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const setUserDispatch = (data) => dispatch(setUser(data));
+  const [createAccount] = useSignUpMutation();
 
   const methods = useForm({ mode: 'onSubmit' });
   const {
@@ -24,7 +25,7 @@ function SignUp() {
   } = methods;
 
   const onSubmit = ({ username, email, password }) => {
-    const user = {
+    const requestData = {
       user: {
         username,
         email,
@@ -32,11 +33,15 @@ function SignUp() {
       },
     };
 
-    createAccount(user)
+    createAccount(requestData)
       .unwrap()
       .then((userData) => {
         setUserDispatch(userData.user);
+        localStorage.setItem('token', userData.user.token);
+
         reset();
+        navigate('/');
+        window.location.reload();
       })
       .catch((e) => {
         if (e.data.errors.username) {
@@ -97,6 +102,7 @@ function SignUp() {
               type="checkbox"
               {...register('agreement', { required: true })}
             />
+
             <span>I agree to the processing of my personal information</span>
             {errors?.agreement ? (
               <div className={classes.necessarily}>*</div>

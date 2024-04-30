@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { Pagination } from 'antd';
 import { useGetAllArticlesQuery } from '../../API/articlesApi';
+// import useAuth from '../../hooks/useAuth';
 
 import classes from './ArticleList.module.scss';
 
@@ -9,14 +12,32 @@ import ArticleItem from '../ArticleItem/ArticleItem';
 import Loader from '../Loader/Loader';
 
 function ArticleList() {
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  // const { isAuth } = useAuth();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get('page') ?? 1;
 
   const offset = (page - 1) * 5; // пропускать по 5 статей, начиная со 2 страницы
   const {
     data: articlesData,
     error,
     isLoading,
+    refetch,
   } = useGetAllArticlesQuery(offset);
+
+  const onChange = (value) => {
+    navigate('/articles');
+    setSearchParams({ ...searchParams, page: value });
+  };
+
+  useEffect(() => {
+    setTimeout(refetch, 500); // чтобы статься успела создасться / удалиться
+  }, []);
+
+  useEffect(() => {
+    refetch();
+  }, [page]);
 
   const articles = articlesData && articlesData.articles;
   const articlesCount = articlesData && articlesData.articlesCount;
@@ -35,7 +56,7 @@ function ArticleList() {
       hideOnSinglePage
       pageSize={5}
       current={page}
-      onChange={setPage}
+      onChange={onChange}
     />
   );
 
@@ -46,8 +67,8 @@ function ArticleList() {
     <ul className={classes.container}>
       {loading}
       {content}
-      {errorMessage}
       {pagination}
+      {errorMessage}
     </ul>
   );
 }

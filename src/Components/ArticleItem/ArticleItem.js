@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import limitText from '../../tools/limitText/limitText';
+import useAuth from '../../hooks/useAuth';
 
 import classes from './ArticleItem.module.scss';
-// import { useGetSoloArticleQuery } from '../../API/articlesApi';
 
 import ArticleTags from '../ArticleTags/ArticleTags';
 import UserProfile from '../UserProfile/UserProfile';
@@ -13,7 +13,7 @@ import ArticleLikes from '../ArticleLikes/ArticleLikes';
 import ArticleActions from '../ArticleActions/ArticleActions';
 
 function ArticleItem({ article, isFull }) {
-  const devFlag = false;
+  const { isAuth, username } = useAuth();
 
   const body = isFull ? (
     <Markdown className={classes.body}>{article.body}</Markdown>
@@ -46,7 +46,7 @@ function ArticleItem({ article, isFull }) {
               </Link>
             </h3>
 
-            <ArticleLikes favoritesCount={article.favoritesCount} />
+            <ArticleLikes article={article} />
           </div>
 
           <ArticleTags tags={article.tagList} isFull={isFull} />
@@ -62,7 +62,9 @@ function ArticleItem({ article, isFull }) {
             isArticle
             whenCreated={article.createdAt}
           />
-          {devFlag ? <ArticleActions /> : null}
+          {isFull && isAuth && article.author.username === username ? (
+            <ArticleActions slug={article.slug} />
+          ) : null}
         </div>
       </div>
 

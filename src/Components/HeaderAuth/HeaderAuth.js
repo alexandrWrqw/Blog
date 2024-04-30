@@ -1,25 +1,35 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPen as editIcon } from '@fortawesome/free-solid-svg-icons';
 
 import { removeUser } from '../../store/userSlice';
+import useAuth from '../../hooks/useAuth';
 
 import classes from './HeaderAuth.module.scss';
 import UserProfile from '../UserProfile/UserProfile';
 
 function HeaderAuth() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { username, image } = useAuth();
+
   const removeUserDispatch = () => dispatch(removeUser());
 
-  const { username, image } = useSelector((state) => state.user);
+  const logOut = () => {
+    removeUserDispatch();
+    navigate('/');
+    window.location.reload();
+  };
 
   return (
     <div className={classes.container}>
-      <button className={classes['create-art']} type="button">
-        Create article
-      </button>
+      <Link to="/new-article">
+        <button className={classes['create-art']} type="button">
+          Create article
+        </button>
+      </Link>
 
       <Link to="profile">
         <button
@@ -32,11 +42,7 @@ function HeaderAuth() {
         </button>
       </Link>
 
-      <button
-        className={classes.out}
-        type="button"
-        onClick={removeUserDispatch}
-      >
+      <button className={classes.out} type="button" onClick={logOut}>
         Log Out
       </button>
     </div>

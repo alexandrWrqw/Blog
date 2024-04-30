@@ -1,44 +1,47 @@
 import { useDispatch } from 'react-redux';
-import { useForm, FormProvider } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import { useSignInMutation } from '../../API/userApi';
 import { setUser } from '../../store/userSlice';
 
-import Input from '../Input/Input';
 import classes from './SignIn.module.scss';
+import Input from '../Input/Input';
 
 function SignIn() {
-  const [loginAccount] = useSignInMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
   const setUserDispatch = (data) => dispatch(setUser(data));
+  const [loginAccount] = useSignInMutation();
 
   const methods = useForm({ mode: 'onSubmit' });
   const { handleSubmit, reset, setError } = methods;
 
   const onSubmit = ({ email, password }) => {
-    const user = {
+    const requestData = {
       user: {
         email,
         password,
       },
     };
 
-    loginAccount(user)
+    loginAccount(requestData)
       .unwrap()
       .then((userData) => {
         setUserDispatch(userData.user);
         localStorage.setItem('token', userData.user.token);
+
         reset();
         navigate('/');
+        window.location.reload();
       })
       .catch(() => {
         setError('email', {
           type: 'invalid',
           message: 'Email or password is invalid',
         });
+
         setError('password', {
           type: 'invalid',
           message: 'Email or password is invalid',

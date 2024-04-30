@@ -50,6 +50,14 @@ function Input({ label, id, type, placeholder }) {
     },
 
     image: {},
+
+    title: {
+      required: 'This is required',
+    },
+
+    description: {
+      required: 'This is required',
+    },
   };
 
   return (

@@ -51,6 +51,11 @@
       & .added-tags * {
         margin-bottom: 5px;
       }
+
+      & .error {
+        margin-top: 3px;
+        color: #f5222d;
+      }
     }
 
     & .field {
