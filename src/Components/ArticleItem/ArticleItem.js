@@ -63,7 +63,7 @@ function ArticleItem({ article, isFull }) {
             whenCreated={article.createdAt}
           />
           {isFull && isAuth && article.author.username === username ? (
-            <ArticleActions slug={article.slug} />
+            <ArticleActions article={article} />
           ) : null}
         </div>
       </div>

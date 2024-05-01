@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { v4 as uniqueKey } from 'uuid';
+// import { v4 as uniqueKey } from 'uuid';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 
 import classes from './EditTags.module.scss';
@@ -8,7 +8,7 @@ function EditTags() {
   const { register, control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'tags',
+    name: 'tagList',
   });
 
   const [value, setValue] = useState('');
@@ -22,14 +22,14 @@ function EditTags() {
     <label className={classes.container} htmlFor="tag">
       <span className={classes.title}>Tags</span>
 
-      {fields.map((tag, index) => (
-        <div key={uniqueKey()} className={classes['added-tags']}>
+      {fields.map((field, index) => (
+        <div key={field.id} className={classes['added-tags']}>
           <input
             className={classes.field}
             type="text"
-            value={tag.value}
+            value={field.value}
             disabled
-            {...register(`tags.${index}.value`)}
+            {...register(`tagList.${index}.value`)}
           />
           <button
             className={classes.delete}

@@ -13,7 +13,6 @@ import Loader from '../Loader/Loader';
 
 function ArticleList() {
   const navigate = useNavigate();
-  // const { isAuth } = useAuth();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') ?? 1;

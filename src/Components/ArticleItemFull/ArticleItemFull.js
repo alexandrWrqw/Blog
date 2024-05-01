@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ArticleItem from '../ArticleItem/ArticleItem';
@@ -8,13 +9,22 @@ import { useGetSoloArticleQuery } from '../../API/articlesApi';
 
 function ArticleItemFull() {
   const { slug } = useParams();
-  const { data: articleData, error, isLoading } = useGetSoloArticleQuery(slug);
+  const {
+    data: articleData,
+    error,
+    isLoading,
+    refetch,
+  } = useGetSoloArticleQuery(slug);
 
   const loading = isLoading ? <Loader /> : null;
   const content = articleData && (
     <ArticleItem article={articleData.article} isFull />
   );
   const errorMessage = error ? <ErrorMessage /> : null;
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <>

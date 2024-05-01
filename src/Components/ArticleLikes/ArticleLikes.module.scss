@@ -12,15 +12,15 @@
   & .filled,
   & .empty {
     font-size: 18px;
+
+    transition:
+      font-size 0.2s ease-in,
+      color 0.2s ease-in;
   }
 
   & .empty {
     position: absolute;
     color: rgba(0, 0, 0, 0.75);
-
-    transition:
-      font-size 0.2s ease-in,
-      color 0.2s ease-in;
   }
 
   & .filled {
@@ -37,7 +37,8 @@
 
 .container-hover {
   &:hover {
-    & .empty {
+    & .empty,
+    & .filled {
       color: #ff0707;
       font-size: 20px;
       cursor: pointer;

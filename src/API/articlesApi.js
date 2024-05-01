@@ -42,6 +42,18 @@ export const articlesApi = createApi({
       }),
     }),
 
+    editArticle: builder.mutation({
+      query: ({ slug, requestData }) => ({
+        url: `/articles/${slug}`,
+        method: 'PUT',
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: requestData,
+      }),
+    }),
+
     deleteArticle: builder.mutation({
       query: (slug) => ({
         url: `/articles/${slug}`,
@@ -78,6 +90,7 @@ export const {
   useGetAllArticlesQuery,
   useGetSoloArticleQuery,
   useCreateArticleMutation,
+  useEditArticleMutation,
   useDeleteArticleMutation,
   useSetFavoriteArticleMutation,
   useDeleteFavoriteArticleMutation,
