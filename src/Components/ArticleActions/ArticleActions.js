@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { useDeleteArticleMutation } from '../../API/articlesApi';
 
@@ -9,16 +9,15 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 function ArticleActions({ article }) {
   const { slug } = article;
+
   const navigate = useNavigate();
   const [deleteArticle] = useDeleteArticleMutation();
-
   const [showModal, setShowModal] = useState(false);
+
   const modalRef = useRef(null);
 
   const onDelete = () => {
-    deleteArticle(slug)
-      .unwrap()
-      .catch((e) => console.log(e));
+    deleteArticle(slug);
     navigate(-1);
   };
 
@@ -56,6 +55,7 @@ function ArticleActions({ article }) {
           onDelete={onDelete}
         />
       </div>
+
       <button className={classes.edit} type="button" onClick={moveEdit}>
         Edit
       </button>

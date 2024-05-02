@@ -3,7 +3,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Pagination } from 'antd';
 import { useGetAllArticlesQuery } from '../../API/articlesApi';
-// import useAuth from '../../hooks/useAuth';
 
 import classes from './ArticleList.module.scss';
 
@@ -31,7 +30,7 @@ function ArticleList() {
   };
 
   useEffect(() => {
-    setTimeout(refetch, 500); // чтобы статься успела создасться / удалиться
+    setTimeout(refetch, 500);
   }, []);
 
   useEffect(() => {

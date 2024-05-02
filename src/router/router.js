@@ -9,6 +9,7 @@ import SignUp from '../Components/SignUp/SignUp';
 import EditProfile from '../Components/EditProfile/EditProfile';
 import CreateArticle from '../Components/CreateArticle/CreateArticle';
 import EditArticle from '../Components/EditArticle/EditArticle';
+import ProtectedRoute from '../Components/ProtectedRoute/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
 
       {
         path: '/new-article',
-        element: <CreateArticle />,
+        element: (
+          <ProtectedRoute>
+            <CreateArticle />
+          </ProtectedRoute>
+        ),
       },
 
       {
@@ -42,17 +47,17 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'sign-in',
+        path: '/sign-in',
         element: <SignIn />,
       },
 
       {
-        path: 'sign-up',
+        path: '/sign-up',
         element: <SignUp />,
       },
 
       {
-        path: 'profile',
+        path: '/profile',
         element: <EditProfile />,
       },
     ],

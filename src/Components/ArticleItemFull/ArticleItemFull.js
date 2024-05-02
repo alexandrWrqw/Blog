@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useGetSoloArticleQuery } from '../../API/articlesApi';
+
 import ArticleItem from '../ArticleItem/ArticleItem';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Loader from '../Loader/Loader';
-
-import { useGetSoloArticleQuery } from '../../API/articlesApi';
 
 function ArticleItemFull() {
   const { slug } = useParams();
@@ -23,7 +23,7 @@ function ArticleItemFull() {
   const errorMessage = error ? <ErrorMessage /> : null;
 
   useEffect(() => {
-    refetch();
+    setTimeout(refetch, 500);
   }, []);
 
   return (

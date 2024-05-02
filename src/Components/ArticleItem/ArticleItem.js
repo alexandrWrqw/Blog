@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
-import limitText from '../../tools/limitText/limitText';
+
+import ReactMarkdown from 'react-markdown';
 import useAuth from '../../hooks/useAuth';
 
 import classes from './ArticleItem.module.scss';
+import limitText from '../../tools/limitText/limitText';
 
 import ArticleTags from '../ArticleTags/ArticleTags';
 import UserProfile from '../UserProfile/UserProfile';
@@ -14,9 +14,10 @@ import ArticleActions from '../ArticleActions/ArticleActions';
 
 function ArticleItem({ article, isFull }) {
   const { isAuth, username } = useAuth();
+  const navigate = useNavigate();
 
   const body = isFull ? (
-    <Markdown className={classes.body}>{article.body}</Markdown>
+    <ReactMarkdown className={classes.body}>{article.body}</ReactMarkdown>
   ) : null;
 
   const title =
@@ -39,11 +40,13 @@ function ArticleItem({ article, isFull }) {
         <div className={classes.content}>
           <div className={classes.header}>
             <h3>
-              <Link to={`/articles/${article.slug}`}>
-                <button className={classes.title} type="button">
-                  {isFull ? title : limitText(title, 55)}
-                </button>
-              </Link>
+              <button
+                className={classes.title}
+                type="button"
+                onClick={() => navigate(`/articles/${article.slug}`)}
+              >
+                {isFull ? title : limitText(title, 55)}
+              </button>
             </h3>
 
             <ArticleLikes article={article} />

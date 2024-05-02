@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { v4 as uniqueKey } from 'uuid';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 
 import classes from './EditTags.module.scss';

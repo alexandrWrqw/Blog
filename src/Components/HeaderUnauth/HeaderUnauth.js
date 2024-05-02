@@ -1,21 +1,27 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import classes from './HeaderUnauth.module.scss';
 
 function HeaderUnauth() {
+  const navigate = useNavigate();
+
   return (
     <div className={classes.container}>
-      <Link className={classes.reset} to="/sign-in">
-        <button className={classes.in} type="button">
-          Sign In
-        </button>
-      </Link>
+      <button
+        className={classes.in}
+        type="button"
+        onClick={() => navigate('/sign-in')}
+      >
+        Sign In
+      </button>
 
-      <Link className={classes.reset} to="/sign-up">
-        <button className={classes.up} type="button">
-          Sign Up
-        </button>
-      </Link>
+      <button
+        className={classes.up}
+        type="button"
+        onClick={() => navigate('/sign-up')}
+      >
+        Sign Up
+      </button>
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 import { useEditArticleMutation } from '../../API/articlesApi';
 
-import classes from './EditArticle.module.scss';
 import NewArticle from '../NewArticle/NewArticle';
 
 function EditArticle() {
@@ -35,7 +34,7 @@ function EditArticle() {
   };
 
   return (
-    <div className={classes.container}>
+    <div>
       <FormProvider {...methods}>
         <NewArticle submit={onSubmit} edit />
       </FormProvider>

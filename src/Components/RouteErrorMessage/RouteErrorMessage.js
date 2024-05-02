@@ -7,9 +7,9 @@ function RouteErrorMessage() {
 
   return (
     <div className={classes.container}>
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
+      <h1 className={classes.title}>Oops!</h1>
+      <p className={classes.text}>This page does not exist..</p>
+      <p className={classes.message}>
         <i>{error.statusText || error.message}</i>
       </p>
     </div>

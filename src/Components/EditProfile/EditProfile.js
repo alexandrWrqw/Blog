@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { useNavigate } from 'react-router-dom';
 import { useUpdateUserMutation } from '../../API/userApi';
 import { setUser } from '../../store/userSlice';
 import useAuth from '../../hooks/useAuth';
@@ -12,16 +12,21 @@ import Input from '../Input/Input';
 function EditProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [editAccount] = useUpdateUserMutation();
+  const {
+    username: defaultUserName,
+    email: defaultEmail,
+    image: defaultImage,
+  } = useAuth();
+
   const updateUserDispatch = (data) => dispatch(setUser(data));
 
-  const { username: defaultUserName, email: defaultEmail } = useAuth();
   const methods = useForm({
     mode: 'onSubmit',
     defaultValues: {
       username: defaultUserName,
       email: defaultEmail,
+      image: defaultImage,
     },
   });
   const { handleSubmit, reset, setError } = methods;

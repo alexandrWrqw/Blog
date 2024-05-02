@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { useFormContext } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 import classes from './NewArticle.module.scss';
 import EditTags from '../EditTags/EditTags';

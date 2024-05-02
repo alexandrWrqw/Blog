@@ -50,7 +50,7 @@ function ArticleLikes({ article }) {
   );
 
   const styles = isAuth
-    ? `${classes.container} ${classes['container-hover']}`
+    ? `${classes.container} ${classes['container-active']}`
     : `${classes.container}`;
 
   return (

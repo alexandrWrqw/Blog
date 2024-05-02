@@ -11,8 +11,9 @@ import Header from '../Header/Header';
 function App() {
   const dispatch = useDispatch();
 
-  const { data: userData, isLoading } = useGetUserQuery();
   const setUserDispatch = (data) => dispatch(setUser(data));
+
+  const { data: userData, isLoading } = useGetUserQuery();
 
   useEffect(() => {
     if (!isLoading && localStorage.getItem('token')) {

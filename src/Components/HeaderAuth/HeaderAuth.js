@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPen as editIcon } from '@fortawesome/free-solid-svg-icons';
@@ -25,22 +25,23 @@ function HeaderAuth() {
 
   return (
     <div className={classes.container}>
-      <Link to="/new-article">
-        <button className={classes['create-art']} type="button">
-          Create article
-        </button>
-      </Link>
+      <button
+        className={classes['create-art']}
+        type="button"
+        onClick={() => navigate('/new-article')}
+      >
+        Create article
+      </button>
 
-      <Link to="profile">
-        <button
-          className={classes['edit-profile']}
-          type="button"
-          aria-label="edit profile"
-        >
-          <FontAwesomeIcon icon={editIcon} className={classes['edit-icon']} />
-          <UserProfile user={{ username, image }} isArticle={false} />
-        </button>
-      </Link>
+      <button
+        className={classes['edit-profile']}
+        type="button"
+        onClick={() => navigate('profile')}
+        aria-label="edit profile"
+      >
+        <FontAwesomeIcon icon={editIcon} className={classes['edit-icon']} />
+        <UserProfile user={{ username, image }} isArticle={false} />
+      </button>
 
       <button className={classes.out} type="button" onClick={logOut}>
         Log Out
