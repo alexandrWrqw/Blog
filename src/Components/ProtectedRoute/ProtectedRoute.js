@@ -1,11 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import useAuth from '../../hooks/useAuth';
+import SignIn from '../SignIn/SignIn';
 
 function ProtectedRoute({ children }) {
   const { isAuth } = useAuth();
-  const navigate = useNavigate();
 
-  return isAuth ? children : navigate('/sign-in');
+  return isAuth ? children : <SignIn />;
 }
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default ProtectedRoute;
