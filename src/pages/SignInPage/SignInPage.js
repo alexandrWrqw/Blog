@@ -5,15 +5,16 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useSignInMutation } from '../../API/userApi';
 import { setUser } from '../../store/userSlice';
 
-import classes from './SignIn.module.scss';
-import Input from '../Input/Input';
+import classes from './SignInPage.module.scss';
+import Input from '../../Components/Input/Input';
+import Loader from '../../Components/Loader/Loader';
 
-function SignIn() {
+function SignInPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const setUserDispatch = (data) => dispatch(setUser(data));
-  const [loginAccount] = useSignInMutation();
+  const [loginAccount, { isLoading }] = useSignInMutation();
 
   const methods = useForm({ mode: 'onSubmit' });
   const { handleSubmit, reset, setError } = methods;
@@ -29,11 +30,12 @@ function SignIn() {
     loginAccount(requestData)
       .unwrap()
       .then((userData) => {
+        navigate('/');
+
         setUserDispatch(userData.user);
         localStorage.setItem('token', userData.user.token);
 
         reset();
-        navigate('/');
         window.location.reload();
       })
       .catch(() => {
@@ -48,6 +50,8 @@ function SignIn() {
         });
       });
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={classes.container}>
@@ -86,4 +90,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInPage;

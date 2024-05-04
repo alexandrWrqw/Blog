@@ -3,12 +3,13 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 import { useEditArticleMutation } from '../../API/articlesApi';
 
-import NewArticle from '../NewArticle/NewArticle';
+import NewArticle from '../../Components/ArticleForm/ArticleForm';
+import Loader from '../../Components/Loader/Loader';
 
-function EditArticle() {
+function EditArticlePage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [editArticle] = useEditArticleMutation();
+  const [editArticle, { isLoading }] = useEditArticleMutation();
   const { slug, title, description, body, tagList } = location.state;
 
   const methods = useForm({
@@ -29,9 +30,12 @@ function EditArticle() {
       },
     };
 
-    editArticle({ slug, requestData });
-    navigate(`/articles/${slug}`, { replace: true });
+    editArticle({ slug, requestData })
+      .unwrap()
+      .then(() => navigate(`/articles/${slug}`, { replace: true }));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div>
@@ -42,4 +46,4 @@ function EditArticle() {
   );
 }
 
-export default EditArticle;
+export default EditArticlePage;

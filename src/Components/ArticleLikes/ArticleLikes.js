@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,29 +17,17 @@ function ArticleLikes({ article }) {
   const { isAuth } = useAuth();
 
   const { slug, favorited, favoritesCount } = article;
-  const [liked, setLiked] = useState(favorited);
-  const [count, setCount] = useState();
 
   const [setLike] = useSetFavoriteArticleMutation();
   const [deleteLike] = useDeleteFavoriteArticleMutation();
 
   const handleClick = () => {
-    if (liked) {
+    if (favorited) {
       deleteLike(slug);
-      setLiked(false);
-
-      setCount((prev) => prev - 1);
     } else {
       setLike(slug);
-      setLiked(true);
-
-      setCount((prev) => prev + 1);
     }
   };
-
-  useEffect(() => {
-    setCount(favoritesCount);
-  }, []);
 
   const activeLikeIcon = (
     <FontAwesomeIcon icon={filledHeartIcon} className={classes.filled} />
@@ -60,9 +48,9 @@ function ArticleLikes({ article }) {
       disabled={!isAuth}
       onClick={handleClick}
     >
-      {liked ? activeLikeIcon : likeIcon}
+      {favorited ? activeLikeIcon : likeIcon}
 
-      <span className={classes.count}>{count}</span>
+      <span className={classes.count}>{favoritesCount}</span>
     </button>
   );
 }

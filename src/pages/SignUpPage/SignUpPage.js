@@ -5,15 +5,16 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useSignUpMutation } from '../../API/userApi';
 import { setUser } from '../../store/userSlice';
 
-import classes from './SignUp.module.scss';
-import Input from '../Input/Input';
+import classes from './SignUpPage.module.scss';
+import Input from '../../Components/Input/Input';
+import Loader from '../../Components/Loader/Loader';
 
-function SignUp() {
+function SignUpPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const setUserDispatch = (data) => dispatch(setUser(data));
-  const [createAccount] = useSignUpMutation();
+  const [createAccount, { isLoading }] = useSignUpMutation();
 
   const methods = useForm({ mode: 'onSubmit' });
   const {
@@ -59,6 +60,8 @@ function SignUp() {
         }
       });
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={classes.container}>
@@ -126,4 +129,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;

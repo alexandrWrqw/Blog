@@ -5,6 +5,8 @@ export const articlesApi = createApi({
 
   baseQuery: fetchBaseQuery({ baseUrl: 'https://blog.kata.academy/api' }),
 
+  tagTypes: ['Article'],
+
   endpoints: (builder) => ({
     getAllArticles: builder.query({
       query: (offset) => ({
@@ -18,6 +20,17 @@ export const articlesApi = createApi({
           offset,
         },
       }),
+
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.articles.map(({ slug }) => ({
+                type: 'Article',
+                id: slug,
+              })),
+              'Article',
+            ]
+          : ['Article'],
     }),
 
     getSoloArticle: builder.query({
@@ -28,6 +41,8 @@ export const articlesApi = createApi({
           Authorization: `Token ${localStorage.getItem('token')}`,
         },
       }),
+
+      providesTags: (result, error, arg) => [{ type: 'Article', id: arg }],
     }),
 
     createArticle: builder.mutation({
@@ -40,6 +55,10 @@ export const articlesApi = createApi({
         },
         body,
       }),
+
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Article', id: arg.slug },
+      ],
     }),
 
     editArticle: builder.mutation({
@@ -52,6 +71,10 @@ export const articlesApi = createApi({
         },
         body: requestData,
       }),
+
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Article', id: arg.slug },
+      ],
     }),
 
     deleteArticle: builder.mutation({
@@ -62,6 +85,8 @@ export const articlesApi = createApi({
           Authorization: `Token ${localStorage.getItem('token')}`,
         },
       }),
+
+      invalidatesTags: (result, error, arg) => [{ type: 'Article', id: arg }],
     }),
 
     setFavoriteArticle: builder.mutation({
@@ -72,6 +97,8 @@ export const articlesApi = createApi({
           Authorization: `Token ${localStorage.getItem('token')}`,
         },
       }),
+
+      invalidatesTags: (result, error, arg) => [{ type: 'Article', id: arg }],
     }),
 
     deleteFavoriteArticle: builder.mutation({
@@ -82,6 +109,8 @@ export const articlesApi = createApi({
           Authorization: `Token ${localStorage.getItem('token')}`,
         },
       }),
+
+      invalidatesTags: (result, error, arg) => [{ type: 'Article', id: arg }],
     }),
   }),
 });

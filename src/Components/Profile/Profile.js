@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
-import classes from './UserProfile.module.scss';
+import classes from './Profile.module.scss';
 
 function UserProfile({ user, isArticle, whenCreated }) {
   const defaultAvatar =

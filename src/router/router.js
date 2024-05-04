@@ -1,64 +1,66 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../Components/App/App';
-import RouteErrorMessage from '../Components/RouteErrorMessage/RouteErrorMessage';
-import ArticleList from '../Components/ArticleList/ArticleList';
-import ArticleItemFull from '../Components/ArticleItemFull/ArticleItemFull';
-import SignIn from '../Components/SignIn/SignIn';
-import SignUp from '../Components/SignUp/SignUp';
-import EditProfile from '../Components/EditProfile/EditProfile';
-import CreateArticle from '../Components/CreateArticle/CreateArticle';
-import EditArticle from '../Components/EditArticle/EditArticle';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import ProtectedRoute from '../Components/ProtectedRoute/ProtectedRoute';
+
+import ArticlesPage from '../pages/ArticlesPage/ArticlesPage';
+import ArticlePage from '../pages/ArticlePage/ArticlePage';
+import CreateArticlePage from '../pages/CreateArticlePage/CreateArticlePage';
+import EditArticlePage from '../pages/EditArticlePage/EditArticlePage';
+
+import SignInPage from '../pages/SignInPage/SignInPage';
+import SignUpPage from '../pages/SignUpPage/SignUpPage';
+import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <RouteErrorMessage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
-        element: <ArticleList />,
+        element: <ArticlesPage />,
       },
 
       {
         path: '/articles',
-        element: <ArticleList />,
+        element: <ArticlesPage />,
       },
 
       {
         path: '/articles/:slug',
-        element: <ArticleItemFull />,
+        element: <ArticlePage />,
       },
 
       {
         path: '/new-article',
         element: (
           <ProtectedRoute>
-            <CreateArticle />
+            <CreateArticlePage />
           </ProtectedRoute>
         ),
       },
 
       {
         path: '/article/:slug/edit',
-        element: <EditArticle />,
+        element: <EditArticlePage />,
       },
 
       {
         path: '/sign-in',
-        element: <SignIn />,
+        element: <SignInPage />,
       },
 
       {
         path: '/sign-up',
-        element: <SignUp />,
+        element: <SignUpPage />,
       },
 
       {
         path: '/profile',
-        element: <EditProfile />,
+        element: <EditProfilePage />,
       },
     ],
   },

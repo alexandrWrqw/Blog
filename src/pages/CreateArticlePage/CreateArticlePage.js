@@ -3,12 +3,13 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 import { useCreateArticleMutation } from '../../API/articlesApi';
 
-import classes from './CreateArticle.module.scss';
-import NewArticle from '../NewArticle/NewArticle';
+import classes from './CreateArticlePage.module.scss';
+import ArticleForm from '../../Components/ArticleForm/ArticleForm';
+import Loader from '../../Components/Loader/Loader';
 
-function CreateArticle() {
+function CreateArticlePage() {
   const navigate = useNavigate();
-  const [createArticle] = useCreateArticleMutation();
+  const [createArticle, { isLoading }] = useCreateArticleMutation();
 
   const methods = useForm({ mode: 'onSubmit' });
 
@@ -20,17 +21,20 @@ function CreateArticle() {
       },
     };
 
-    createArticle(requestData);
-    navigate('/');
+    createArticle(requestData)
+      .unwrap()
+      .then((res) => navigate(`/articles/${res.article.slug}`));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={classes.container}>
       <FormProvider {...methods}>
-        <NewArticle submit={onSubmit} />
+        <ArticleForm submit={onSubmit} />
       </FormProvider>
     </div>
   );
 }
 
-export default CreateArticle;
+export default CreateArticlePage;

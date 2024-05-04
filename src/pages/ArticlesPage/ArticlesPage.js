@@ -1,16 +1,15 @@
-import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Pagination } from 'antd';
 import { useGetAllArticlesQuery } from '../../API/articlesApi';
 
-import classes from './ArticleList.module.scss';
+import classes from './ArticlesPage.module.scss';
 
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import ArticleItem from '../ArticleItem/ArticleItem';
-import Loader from '../Loader/Loader';
+import ErrorMessage from '../../Components/ErrorMessage/ErrorMessage';
+import ArticleItem from '../../Components/ArticleItem/ArticleItem';
+import Loader from '../../Components/Loader/Loader';
 
-function ArticleList() {
+function ArticlesPage() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,21 +20,14 @@ function ArticleList() {
     data: articlesData,
     error,
     isLoading,
-    refetch,
-  } = useGetAllArticlesQuery(offset);
+  } = useGetAllArticlesQuery(offset, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const onChange = (value) => {
     navigate('/articles');
     setSearchParams({ ...searchParams, page: value });
   };
-
-  useEffect(() => {
-    setTimeout(refetch, 500);
-  }, []);
-
-  useEffect(() => {
-    refetch();
-  }, [page]);
 
   const articles = articlesData && articlesData.articles;
   const articlesCount = articlesData && articlesData.articlesCount;
@@ -71,4 +63,4 @@ function ArticleList() {
   );
 }
 
-export default ArticleList;
+export default ArticlesPage;

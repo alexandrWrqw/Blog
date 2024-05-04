@@ -6,13 +6,14 @@ import { useUpdateUserMutation } from '../../API/userApi';
 import { setUser } from '../../store/userSlice';
 import useAuth from '../../hooks/useAuth';
 
-import classes from './EditProfile.module.scss';
-import Input from '../Input/Input';
+import classes from './EditProfilePage.module.scss';
+import Input from '../../Components/Input/Input';
+import Loader from '../../Components/Loader/Loader';
 
-function EditProfile() {
+function EditProfilePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [editAccount] = useUpdateUserMutation();
+  const [editAccount, { isLoading }] = useUpdateUserMutation();
   const {
     username: defaultUserName,
     email: defaultEmail,
@@ -66,6 +67,8 @@ function EditProfile() {
       });
   };
 
+  if (isLoading) return <Loader />;
+
   return (
     <div className={classes.container}>
       <FormProvider {...methods}>
@@ -109,4 +112,4 @@ function EditProfile() {
   );
 }
 
-export default EditProfile;
+export default EditProfilePage;

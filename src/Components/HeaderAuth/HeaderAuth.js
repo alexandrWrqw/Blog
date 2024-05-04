@@ -8,7 +8,7 @@ import { removeUser } from '../../store/userSlice';
 import useAuth from '../../hooks/useAuth';
 
 import classes from './HeaderAuth.module.scss';
-import UserProfile from '../UserProfile/UserProfile';
+import UserProfile from '../Profile/Profile';
 
 function HeaderAuth() {
   const navigate = useNavigate();

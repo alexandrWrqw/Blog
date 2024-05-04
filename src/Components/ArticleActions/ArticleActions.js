@@ -6,19 +6,21 @@ import { useDeleteArticleMutation } from '../../API/articlesApi';
 
 import classes from './ArticleActions.module.scss';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import Loader from '../Loader/Loader';
 
 function ArticleActions({ article }) {
   const { slug } = article;
 
   const navigate = useNavigate();
-  const [deleteArticle] = useDeleteArticleMutation();
+  const [deleteArticle, { isLoading }] = useDeleteArticleMutation();
   const [showModal, setShowModal] = useState(false);
 
   const modalRef = useRef(null);
 
   const onDelete = () => {
-    deleteArticle(slug);
-    navigate(-1);
+    deleteArticle(slug)
+      .unwrap()
+      .then(() => navigate(-1));
   };
 
   const moveEdit = () => {
@@ -36,6 +38,9 @@ function ArticleActions({ article }) {
 
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
+
+  if (isLoading)
+    return <Loader styles={{ width: '25px', borderWidth: '5px' }} />;
 
   return (
     <div className={classes.container}>

@@ -8,7 +8,7 @@ import classes from './ArticleItem.module.scss';
 import limitText from '../../tools/limitText/limitText';
 
 import ArticleTags from '../ArticleTags/ArticleTags';
-import UserProfile from '../UserProfile/UserProfile';
+import UserProfile from '../Profile/Profile';
 import ArticleLikes from '../ArticleLikes/ArticleLikes';
 import ArticleActions from '../ArticleActions/ArticleActions';
 
