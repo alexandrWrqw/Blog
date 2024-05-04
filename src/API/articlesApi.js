@@ -28,9 +28,9 @@ export const articlesApi = createApi({
                 type: 'Article',
                 id: slug,
               })),
-              'Article',
+              { type: 'Article', id: 'LIST' },
             ]
-          : ['Article'],
+          : [{ type: 'Article', id: 'LIST' }],
     }),
 
     getSoloArticle: builder.query({
@@ -56,9 +56,7 @@ export const articlesApi = createApi({
         body,
       }),
 
-      invalidatesTags: (result, error, arg) => [
-        { type: 'Article', id: arg.slug },
-      ],
+      invalidatesTags: () => [{ type: 'Article', id: 'LIST' }],
     }),
 
     editArticle: builder.mutation({

@@ -20,7 +20,7 @@ function ArticleActions({ article }) {
   const onDelete = () => {
     deleteArticle(slug)
       .unwrap()
-      .then(() => navigate(-1));
+      .then(() => navigate('/'));
   };
 
   const moveEdit = () => {

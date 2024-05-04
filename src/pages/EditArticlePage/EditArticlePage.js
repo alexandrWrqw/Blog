@@ -3,7 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 import { useEditArticleMutation } from '../../API/articlesApi';
 
-import NewArticle from '../../Components/ArticleForm/ArticleForm';
+import ArticleForm from '../../Components/ArticleForm/ArticleForm';
 import Loader from '../../Components/Loader/Loader';
 
 function EditArticlePage() {
@@ -40,7 +40,7 @@ function EditArticlePage() {
   return (
     <div>
       <FormProvider {...methods}>
-        <NewArticle submit={onSubmit} edit />
+        <ArticleForm submit={onSubmit} edit />
       </FormProvider>
     </div>
   );
