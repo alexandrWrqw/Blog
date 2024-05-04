@@ -18,9 +18,8 @@ function ArticleActions({ article }) {
   const modalRef = useRef(null);
 
   const onDelete = () => {
-    deleteArticle(slug)
-      .unwrap()
-      .then(() => navigate('/'));
+    deleteArticle(slug);
+    navigate('/', { replace: true });
   };
 
   const moveEdit = () => {
